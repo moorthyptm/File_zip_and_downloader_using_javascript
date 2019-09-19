@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>File Downloader</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="#">JS file downloader</a>
+    </header>
+
+    <div class="container">
+        <form action="">
+
+            <strong>Enter URLS</strong><br>
+            <div class="input-group">
+                <input type="text" name="" id="" class="url" placeholder="http://google.com">
+            </div>
+            <div class="action">
+                <button type="button" id="add-btn">Add URL</button>
+                <button type="submit" id="download-btn">Zip And Download</button>
+            </div>
+            <a class="hit-download" title="hit-download" style="display: none" href="" download>download</a>
+            <p>Note: External endpoint request verify CORS</p>
+
+        </form>
+
+    </div>
+
+    <script src="js/jszip.js"></script>
+    <script>
+
+        var addBtn = document.querySelector('#add-btn');
+        var downloadBtn = document.querySelector('#download-btn');
+        var inputGrp = document.querySelector('.input-group');
+        var URLS = [];
+
+        addBtn.addEventListener('click', this.addUrlField);
+        downloadBtn.addEventListener('click', ($event) => {
+            $event.preventDefault();
+            this.zipAndDownload();
+        });
+
+        function addUrlField() {
+            var Node = document.createElement('input');
+            Node.type = 'text';
+            Node.className = 'url';
+            Node.placeholder = 'http://google.com';
+            inputGrp.appendChild(Node);
+        }
+
+        function zipAndDownload() {
+            if (constructUrls()) {
+
+                var zip = new JSZip();
+                var a = document.querySelector(".hit-download");
+                function request(url) {
+                    return new Promise(function (resolve) {
+                        var httpRequest = new XMLHttpRequest();
+                        httpRequest.open("GET", url, true);
+                        var filename = url.replace(/.*\//g, "");
+                        httpRequest.onload = function () {
+                            zip.file(filename, this.responseText, { binary: true });
+                            resolve()
+                        }
+                        httpRequest.send()
+                    })
+                }
+
+                Promise.all(URLS.map(function (url) {
+                    return request(url)
+                }))
+                    .then(function () {
+                        // console.log(zip);
+                        zip.generateAsync({
+                            type: "blob"
+                        })
+                            .then(function (content) {
+                                a.download = "folder" + new Date().getTime() + '.zip';
+                                a.href = URL.createObjectURL(content);
+                                a.innerHTML = "download " + a.download;
+                                a.click();
+                            });
+                    })
+            }
+        }
+
+        function constructUrls() {
+            URLS = [];
+            var urlElement = document.querySelectorAll('.url');
+            urlElement.forEach(element => {
+                if (element.value !== '') {
+                    URLS.push(element.value);
+                }
+            });
+            return URLS.length > 0;
+        }
+    </script>
+
+</body>
+
+</html>

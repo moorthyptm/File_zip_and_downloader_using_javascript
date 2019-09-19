@@ -1,0 +1,63 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+header {
+  padding: 20px;
+  background-color: coral;
+}
+
+header a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.container {
+  width: 80%;
+  margin: 0px auto;
+}
+
+.container form {
+  margin-top: 5em;
+}
+
+.container form input {
+  margin-top: 1.4em;
+  padding: 10px 5px;
+  width: 258px;
+  display: block;
+}
+
+.container form .action {
+  margin-top: 1em;
+}
+
+.container form button {
+  padding: 10px 26px;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.container form button:nth-child(1) {
+  background-color: #007bff;
+}
+
+.container form button:nth-child(1):hover {
+  background-color: #0062cc;
+}
+
+.container form button:nth-child(2) {
+  background-color: #17a2b8;
+}
+
+.container form button:nth-child(2):hover {
+  background-color: #117a8b;
+}
+
+/*# sourceMappingURL=style.css.map */

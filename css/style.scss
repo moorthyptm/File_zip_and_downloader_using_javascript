@@ -1,0 +1,54 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+header {
+  padding: 20px;
+  background-color: coral;
+  a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+.container {
+  width: 80%;
+  margin: 0px auto;
+
+  form {
+    margin-top: 5em;
+    input {
+      margin-top: 1.4em;
+      padding: 10px 5px;
+      width: 258px;
+      display: block;
+    }
+    .action {
+      margin-top: 1em;
+    }
+
+    button {
+      padding: 10px 26px;
+      border: none;
+      outline: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 3px;
+      &:nth-child(1) {
+        background-color: #007bff;
+        &:hover {
+          background-color: darken($color: #007bff, $amount: 10%);
+        }
+      }
+      &:nth-child(2) {
+        background-color: #17a2b8;
+        &:hover {
+          background-color: darken($color: #17a2b8, $amount: 10%);
+        }
+      }
+    }
+  }
+}
